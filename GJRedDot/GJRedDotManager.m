@@ -202,7 +202,7 @@
 - (void)resetRedDotState:(BOOL)show forKey:(NSString *)key {
     id<GJRedDotModelProtocol> model = self.redDotModelDic[key];
     if (!model) return;
-    if (model.subDots.count > 0) return; //有子节点不可手动改，以子节点为准
+    //FIX: cddjr if (model.subDots.count > 0) return; //有子节点不可手动改，以子节点为准
     model.show = @(show);
     
     if (self.modelType == GJRedDotModelCustom) {
@@ -261,10 +261,10 @@
             }
         }
     }
-    else {
+    //FIX: cddjr else {
         return model.show.boolValue;
-    }
-    return NO;
+    //FIX: cddjr }
+    //FIX: cddjr return NO;
 }
 
 #pragma mark -
