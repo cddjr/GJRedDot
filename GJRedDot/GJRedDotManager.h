@@ -55,6 +55,9 @@ typedef NS_ENUM(NSUInteger, GJRedDotModelType) {
  */
 - (void)resetRedDotState:(BOOL)show forKey:(NSString *)key;
 
+//FIX: cddjr
+- (void)resetRedDotState:(BOOL)show forKey:(NSString *)key includeChilds:(BOOL)incChilds;
+
 /**
  *  show all
  */

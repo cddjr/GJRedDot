@@ -200,10 +200,23 @@
  *  限定了当前节点“无子节”点才可修改show
  */
 - (void)resetRedDotState:(BOOL)show forKey:(NSString *)key {
+    //FIX: cddjr
+    [self resetRedDotState:show forKey:key includeChilds:FALSE];
+}
+
+//FIX: cddjr
+- (void)resetRedDotState:(BOOL)show forKey:(NSString *)key includeChilds:(BOOL)incChilds {
     id<GJRedDotModelProtocol> model = self.redDotModelDic[key];
     if (!model) return;
     //FIX: cddjr if (model.subDots.count > 0) return; //有子节点不可手动改，以子节点为准
     model.show = @(show);
+    //FIX: cddjr
+    if (incChilds && model.subDots.count > 0) {
+        for (id<GJRedDotModelProtocol> redDot in model.subDots) {
+            [self resetRedDotState:show forKey:redDot.key includeChilds:TRUE];
+        }
+    }
+    //FIX: cddjr
     
     if (self.modelType == GJRedDotModelCustom) {
         [self.modelExecutor saveModelWithKey:key];
