@@ -209,6 +209,7 @@
     id<GJRedDotModelProtocol> model = self.redDotModelDic[key];
     if (!model) return;
     //FIX: cddjr if (model.subDots.count > 0) return; //有子节点不可手动改，以子节点为准
+    BOOL changed = model.show.boolValue != show;
     model.show = @(show);
     //FIX: cddjr
     if (incChilds && model.subDots.count > 0) {
@@ -227,7 +228,11 @@
         [__GJUserDefaults synchronize];
     }
     
-    [self refreshRedDotTreeForKey:key];
+    //FIX: cddjr
+    if (changed) {
+        [self refreshRedDotTreeForKey:key];
+    }
+    //FIX: cddjr
 }
 
 /**
