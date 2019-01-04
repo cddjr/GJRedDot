@@ -49,7 +49,7 @@
 #pragma mark- regist
 
 - (void)registWithProfile:(NSArray *)profile defaultShow:(BOOL)show {
-    BOOL save;
+    BOOL save = NO;//FIX: cddjr 初始化
     [self registWithObject:profile parent:nil defaultShow:show save:&save];
     if (save) [__GJUserDefaults synchronize];
 }
@@ -71,7 +71,7 @@
     if (model) return;
     
     id<GJRedDotModelProtocol> parent = self.redDotModelDic[parentKey];
-    BOOL save;
+    BOOL save = NO;//FIX: cddjr 初始化
     [self fetchOrCreateModelWithKey:key parent:parent defaultShow:show save:&save isLeaf:YES];
     if (save) [__GJUserDefaults synchronize];
     
